@@ -1,0 +1,5 @@
+{
+  "name": "VECT",
+  "description": "A high-end architectural image fine-tuning tool using Gemini 2.5 Flash Image for precision edits.",
+  "requestFramePermissions": []
+}
