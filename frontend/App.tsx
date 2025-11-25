@@ -9,8 +9,8 @@ import { Settings } from './views/Settings';
 import { Profile } from './views/Profile';
 import { Notifications } from './views/Notifications';
 import { LandingPage } from './views/Landing/LandingPage';
-import { Login } from './views/Auth/Login';
-import { Register } from './views/Auth/Register';
+import Login from './views/Auth/Login';
+import Register from './views/Auth/Register';
 
 function App() {
   return (
