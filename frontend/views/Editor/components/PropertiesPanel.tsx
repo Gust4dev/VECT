@@ -26,9 +26,9 @@ export const PropertiesPanel: React.FC<PropertiesPanelProps> = ({
       <div className="p-6 pt-8 border-b border-white/5 bg-gradient-to-b from-white/5 to-transparent">
         <div className="flex items-center gap-2 mb-1">
            <Sparkles size={18} className="text-blue-400" />
-           <h2 className="text-lg font-bold text-white">Ajuste Fino IA</h2>
+           <h2 className="text-lg font-bold text-theme-title">Ajuste Fino IA</h2>
         </div>
-        <p className="text-xs text-zinc-400 leading-relaxed">
+        <p className="text-xs text-theme-body leading-relaxed">
            Selecione a área na imagem e descreva o que deseja alterar.
         </p>
       </div>
@@ -40,7 +40,7 @@ export const PropertiesPanel: React.FC<PropertiesPanelProps> = ({
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Ex: Trocar o piso por madeira clara, adicionar vegetação na parede..."
-                  className="relative w-full h-36 bg-[#0c0c0e] border border-zinc-700/50 rounded-xl p-4 text-sm text-white focus:ring-0 focus:border-blue-500/50 outline-none resize-none placeholder-zinc-600 transition-all shadow-inner"
+                  className="relative w-full h-36 input-theme rounded-xl p-4 text-sm focus:ring-0 focus:border-blue-500/50 outline-none resize-none transition-all shadow-inner"
               />
           </div>
 

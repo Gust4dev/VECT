@@ -46,8 +46,8 @@ export const Profile: React.FC = () => {
                 </div>
             </div>
             <div className="flex-1 mb-2">
-                <h1 className="text-3xl font-bold text-white mb-1">{user.name}</h1>
-                <p className="text-zinc-400">Arquiteto Senior • {user.email}</p>
+                <h1 className="text-3xl font-bold text-theme-title mb-1">{user.name}</h1>
+                <p className="text-theme-body">Arquiteto Senior • {user.email}</p>
             </div>
             <div className="flex items-center gap-3 mb-3 md:mb-0">
                 <div className="px-4 py-2 bg-blue-600/20 border border-blue-500/30 rounded-lg text-blue-400 font-bold text-sm flex items-center gap-2">
@@ -63,7 +63,7 @@ export const Profile: React.FC = () => {
           {/* Subscription Status */}
           <div className="glass-panel rounded-3xl p-8 flex flex-col">
               <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <h3 className="text-lg font-bold text-theme-title flex items-center gap-2">
                       <Zap size={20} className="text-yellow-500" />
                       Assinatura
                   </h3>
@@ -73,10 +73,10 @@ export const Profile: React.FC = () => {
               <div className="flex-1 space-y-4">
                   <div className="p-4 bg-white/5 rounded-xl border border-white/5">
                       <p className="text-xs text-zinc-500 uppercase font-bold mb-1">Plano Atual</p>
-                      <p className="text-xl font-bold text-white">VECT Professional</p>
-                      <p className="text-sm text-zinc-400 mt-1">Renova em 24 Out, 2025</p>
+                      <p className="text-xl font-bold text-theme-title">VECT Professional</p>
+                      <p className="text-sm text-theme-body mt-1">Renova em 24 Out, 2025</p>
                   </div>
-                  <div className="flex items-center gap-3 text-sm text-zinc-300">
+                  <div className="flex items-center gap-3 text-sm text-theme-subtitle">
                       <CreditCard size={16} className="text-zinc-500" />
                       Visa terminando em 4242
                   </div>
@@ -85,7 +85,7 @@ export const Profile: React.FC = () => {
 
           {/* Usage Stats */}
           <div className="glass-panel rounded-3xl p-8">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2 mb-6">
+              <h3 className="text-lg font-bold text-theme-title flex items-center gap-2 mb-6">
                   <HardDrive size={20} className="text-purple-500" />
                   Uso e Armazenamento
               </h3>
@@ -93,8 +93,8 @@ export const Profile: React.FC = () => {
               <div className="space-y-6">
                   <div>
                       <div className="flex justify-between text-sm mb-2">
-                          <span className="text-zinc-300">Projetos Ativos</span>
-                          <span className="text-white font-bold">12 / 50</span>
+                          <span className="text-theme-subtitle">Projetos Ativos</span>
+                          <span className="text-theme-title font-bold">12 / 50</span>
                       </div>
                       <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
                           <div className="h-full bg-blue-500 w-[24%]"></div>
@@ -103,8 +103,8 @@ export const Profile: React.FC = () => {
 
                   <div>
                       <div className="flex justify-between text-sm mb-2">
-                          <span className="text-zinc-300">Armazenamento em Nuvem</span>
-                          <span className="text-white font-bold">45GB / 100GB</span>
+                          <span className="text-theme-subtitle">Armazenamento em Nuvem</span>
+                          <span className="text-theme-title font-bold">45GB / 100GB</span>
                       </div>
                       <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
                           <div className="h-full bg-purple-500 w-[45%]"></div>
@@ -113,8 +113,8 @@ export const Profile: React.FC = () => {
 
                   <div>
                       <div className="flex justify-between text-sm mb-2">
-                          <span className="text-zinc-300">Gerações de IA (Mensal)</span>
-                          <span className="text-white font-bold">850 / 2000</span>
+                          <span className="text-theme-subtitle">Gerações de IA (Mensal)</span>
+                          <span className="text-theme-title font-bold">850 / 2000</span>
                       </div>
                       <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
                           <div className="h-full bg-green-500 w-[42%]"></div>

@@ -104,8 +104,8 @@ export const Editor: React.FC = () => {
           </div>
           
           <div className="text-center relative z-10">
-            <h3 className="text-3xl font-bold text-white mb-3 tracking-tight">Novo Projeto</h3>
-            <p className="text-lg text-zinc-400 mb-10 font-light">Carregue seu render para começar a edição com IA</p>
+            <h3 className="text-3xl font-bold text-theme-title mb-3 tracking-tight">Novo Projeto</h3>
+            <p className="text-lg text-theme-body mb-10 font-light">Carregue seu render para começar a edição com IA</p>
             <label className="relative inline-flex group/btn cursor-pointer">
                 <div className="absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover/btn:opacity-100 group-hover/btn:-inset-1 group-hover/btn:duration-200 animate-tilt"></div>
                 <div className="relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-zinc-900 font-pj rounded-xl">
@@ -203,8 +203,8 @@ export const Editor: React.FC = () => {
                     </div>
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-2">Funcionalidade em Breve!</h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+                <h3 className="text-xl font-bold text-theme-title mb-2">Funcionalidade em Breve!</h3>
+                <p className="text-theme-body text-sm leading-relaxed mb-6">
                     A geração via IA está sendo aprimorada para oferecer resultados ainda mais realistas.
                 </p>
 

@@ -5,22 +5,131 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply font-sans bg-black text-zinc-200;
-    background-image: radial-gradient(ellipse at top, #172554 0%, #020617 40%, #000000 100%);
-    background-attachment: fixed;
-  }
+  /* Base styles */
+}
+
+body {
+  @apply font-sans transition-colors duration-1000 ease-in-out;
+  background-attachment: fixed;
+}
+
+html.dark body {
+  @apply bg-black text-zinc-200;
+  background-image: radial-gradient(ellipse at top, #172554 0%, #020617 40%, #000000 100%);
+}
+
+html.light body {
+  @apply bg-white text-zinc-900;
+  background-image: radial-gradient(ellipse at top, #bfdbfe 0%, #ffffff 50%, #ffffff 100%);
 }
 
 @layer components {
   .glass-panel {
-    @apply bg-[#121214]/60 backdrop-blur-md border border-white/10;
+    @apply bg-[#121214]/60 backdrop-blur-md border border-white/10 transition-colors duration-1000 ease-in-out;
   }
+
+  html.light .glass-panel {
+    @apply bg-white/80 border-black/5 shadow-xl;
+  }
+
+  /* Theme-aware text utilities with forced visibility */
+  .text-theme-title {
+    color: #18181b !important; /* zinc-900 in light */
+  }
+  
+  html.dark .text-theme-title {
+    color: #ffffff !important; /* white in dark */
+  }
+
+  .text-theme-subtitle {
+    color: #3f3f46 !important; /* zinc-700 in light */
+  }
+  
+  html.dark .text-theme-subtitle {
+    color: #e4e4e7 !important; /* zinc-200 in dark */
+  }
+
+  .text-theme-body {
+    color: #71717a !important; /* zinc-500 in light */
+  }
+  
+  html.dark .text-theme-body {
+    color: #a1a1aa !important; /* zinc-400 in dark */
+  }
+
+  .text-theme-muted {
+    color: #a1a1aa !important; /* zinc-400 in light */
+  }
+  
+  html.dark .text-theme-muted {
+    color: #71717a !important; /* zinc-500 in dark */
+  }
+
+  .input-theme {
+    background-color: #f4f4f5 !important; /* zinc-100 in light */
+    border-color: #d4d4d8 !important; /* zinc-300 in light */
+    color: #18181b !important; /* zinc-900 in light */
+  }
+
+  .input-theme::placeholder {
+    color: #a1a1aa !important; /* zinc-400 in light */
+  }
+
+  html.dark .input-theme {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border-color: rgba(113, 113, 122, 0.5) !important;
+    color: #ffffff !important;
+  }
+
+  html.dark .input-theme::placeholder {
+    color: #71717a !important; /* zinc-600 in dark */
+  }
+
   
   .animate-fade-in-up {
     animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     @apply opacity-0 translate-y-5;
   }
+
+  .fill-animation {
+    @apply relative overflow-hidden;
+  }
+  .fill-animation::before {
+    content: '';
+    @apply absolute top-0 left-0 h-full w-0 transition-all duration-300 ease-out;
+    z-index: 0;
+  }
+  /* When Dark (default), hover/active fills with White */
+  html.dark .fill-animation::before {
+    @apply bg-white;
+  }
+  /* When Light, hover/active fills with Black */
+  html.light .fill-animation::before {
+    @apply bg-zinc-900;
+  }
+  
+  .fill-animation.active::before {
+    @apply w-full;
+  }
+
+  .fill-animation > * {
+    @apply relative z-10 transition-colors duration-300;
+  }
+  
+  html.dark .fill-animation:hover > *,
+  html.dark .fill-animation.active > * {
+    @apply text-black;
+  }
+
+  html.light .fill-animation:hover > *,
+  html.light .fill-animation.active > * {
+    @apply text-white;
+  }
+}
+
+/* Global Transition for all major color properties */
+* {
+  @apply transition-colors duration-1000 ease-in-out border-opacity-100;
 }
 
 @keyframes fadeInUp {

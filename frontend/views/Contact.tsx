@@ -5,15 +5,15 @@ export const Contact: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto p-8 pb-16 min-h-[calc(100vh-8rem)] animate-fade-in-up">
       <div className="mb-12 text-center">
-        <h1 className="text-5xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-500">Entre em Contato</h1>
-        <p className="text-zinc-400 text-lg font-light max-w-2xl mx-auto">Vamos conversar sobre como o VECT pode transformar seus projetos de arquitetura com inteligência artificial.</p>
+        <h1 className="text-5xl font-bold text-theme-title mb-4">Entre em Contato</h1>
+        <p className="text-theme-body text-lg font-light max-w-2xl mx-auto">Vamos conversar sobre como o VECT pode transformar seus projetos de arquitetura com inteligência artificial.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Column: Contact Info */}
         <div className="lg:col-span-4 space-y-6">
           <div className="glass-panel rounded-3xl p-8 hover:border-blue-500/30 transition-all duration-500 h-full flex flex-col">
-            <h3 className="text-xl font-bold text-white mb-8 flex items-center gap-3">
+            <h3 className="text-xl font-bold text-theme-title mb-8 flex items-center gap-3">
                 <div className="p-2 bg-blue-600/20 rounded-lg text-blue-500"><Building2 size={20} /></div>
                 VECT Studios
             </h3>
@@ -25,7 +25,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs text-zinc-500 font-bold uppercase tracking-wide mb-1">Endereço</p>
-                  <p className="text-zinc-200 text-sm leading-relaxed">Av. Arquitetura, 9999<br/>Bairro Design - São Paulo, SP<br/>CEP: 99999-999</p>
+                  <p className="text-theme-subtitle text-sm leading-relaxed">Av. Arquitetura, 9999<br/>Bairro Design - São Paulo, SP<br/>CEP: 99999-999</p>
                 </div>
               </div>
 
@@ -35,8 +35,8 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                    <p className="text-xs text-zinc-500 font-bold uppercase tracking-wide mb-1">Email</p>
-                  <p className="text-zinc-200 text-sm font-medium hover:text-blue-400 transition-colors cursor-pointer">contato@vect.ai</p>
-                  <p className="text-zinc-200 text-sm font-medium hover:text-blue-400 transition-colors cursor-pointer">vendas@vect.ai</p>
+                  <p className="text-theme-subtitle text-sm font-medium hover:text-blue-400 transition-colors cursor-pointer">contato@vect.ai</p>
+                  <p className="text-theme-subtitle text-sm font-medium hover:text-blue-400 transition-colors cursor-pointer">vendas@vect.ai</p>
                 </div>
               </div>
 
@@ -46,19 +46,19 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                    <p className="text-xs text-zinc-500 font-bold uppercase tracking-wide mb-1">Telefones</p>
-                  <p className="text-zinc-200 text-sm font-medium hover:text-blue-400 transition-colors cursor-pointer">+55 11 99999-9999</p>
-                  <p className="text-zinc-200 text-sm font-medium hover:text-blue-400 transition-colors cursor-pointer">+55 11 99999-9998</p>
+                  <p className="text-theme-subtitle text-sm font-medium hover:text-blue-400 transition-colors cursor-pointer">+55 11 99999-9999</p>
+                  <p className="text-theme-subtitle text-sm font-medium hover:text-blue-400 transition-colors cursor-pointer">+55 11 99999-9998</p>
                 </div>
               </div>
             </div>
 
              <div className="pt-8 mt-8 border-t border-white/10">
                 <div className="flex gap-3">
-                <a href="#" className="flex-1 flex items-center justify-center gap-2 p-3 bg-white/5 border border-white/10 rounded-xl text-zinc-300 hover:text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300">
+                <a href="#" className="flex-1 flex items-center justify-center gap-2 p-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl text-zinc-600 dark:text-zinc-300 hover:text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300">
                     <Globe size={16} />
                     <span className="text-xs font-bold">Website</span>
                 </a>
-                <a href="#" className="flex-1 flex items-center justify-center gap-2 p-3 bg-white/5 border border-white/10 rounded-xl text-zinc-300 hover:text-white hover:bg-[#0077b5] hover:border-[#0077b5] transition-all duration-300">
+                <a href="#" className="flex-1 flex items-center justify-center gap-2 p-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl text-zinc-600 dark:text-zinc-300 hover:text-white hover:bg-[#0077b5] hover:border-[#0077b5] transition-all duration-300">
                     <Linkedin size={16} />
                     <span className="text-xs font-bold">LinkedIn</span>
                 </a>
@@ -73,36 +73,36 @@ export const Contact: React.FC = () => {
              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"></div>
             
             <div className="mb-10">
-              <h3 className="text-2xl font-bold text-white mb-2">Envie uma Mensagem</h3>
-              <p className="text-zinc-400">Nossa equipe responderá sua solicitação em até 24 horas</p>
+              <h3 className="text-2xl font-bold text-theme-title mb-2">Envie uma Mensagem</h3>
+              <p className="text-theme-body">Nossa equipe responderá sua solicitação em até 24 horas</p>
             </div>
 
             <form className="space-y-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="group">
                   <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 ml-1 group-focus-within:text-blue-400 transition-colors">Nome Completo</label>
-                  <input type="text" placeholder="Seu nome" className="w-full bg-black/20 border border-zinc-700/50 rounded-xl px-5 py-4 text-white placeholder-zinc-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all focus:bg-black/40" />
+                  <input type="text" placeholder="Seu nome" className="w-full input-theme rounded-xl px-5 py-4 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" />
                 </div>
                 <div className="group">
                   <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 ml-1 group-focus-within:text-blue-400 transition-colors">Email Corporativo</label>
-                  <input type="email" placeholder="seuemail@exemplo.com" className="w-full bg-black/20 border border-zinc-700/50 rounded-xl px-5 py-4 text-white placeholder-zinc-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all focus:bg-black/40" />
+                  <input type="email" placeholder="seuemail@exemplo.com" className="w-full input-theme rounded-xl px-5 py-4 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="group">
                   <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 ml-1 group-focus-within:text-blue-400 transition-colors">Telefone</label>
-                  <input type="tel" placeholder="(11) 99999-9999" className="w-full bg-black/20 border border-zinc-700/50 rounded-xl px-5 py-4 text-white placeholder-zinc-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all focus:bg-black/40" />
+                  <input type="tel" placeholder="(11) 99999-9999" className="w-full input-theme rounded-xl px-5 py-4 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" />
                 </div>
                 <div className="group">
                   <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 ml-1 group-focus-within:text-blue-400 transition-colors">Empresa</label>
-                  <input type="text" placeholder="Nome da sua empresa" className="w-full bg-black/20 border border-zinc-700/50 rounded-xl px-5 py-4 text-white placeholder-zinc-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all focus:bg-black/40" />
+                  <input type="text" placeholder="Nome da sua empresa" className="w-full input-theme rounded-xl px-5 py-4 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" />
                 </div>
               </div>
 
               <div className="group">
                 <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 ml-1 group-focus-within:text-blue-400 transition-colors">Mensagem</label>
-                <textarea placeholder="Como podemos ajudar você?" className="w-full h-40 bg-black/20 border border-zinc-700/50 rounded-xl px-5 py-4 text-white placeholder-zinc-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all resize-none focus:bg-black/40"></textarea>
+                <textarea placeholder="Como podemos ajudar você?" className="w-full h-40 input-theme rounded-xl px-5 py-4 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all resize-none"></textarea>
               </div>
 
               <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-4">

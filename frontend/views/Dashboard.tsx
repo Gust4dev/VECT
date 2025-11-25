@@ -55,8 +55,8 @@ export const Dashboard: React.FC = () => {
     <div className="p-8 max-w-7xl mx-auto min-h-[calc(100vh-8rem)] animate-fade-in-up">
       <div className="flex items-end justify-between mb-12">
         <div>
-          <h1 className="text-4xl font-bold text-white mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-200 to-zinc-400">Meus Projetos</h1>
-          <p className="text-zinc-400 text-lg font-light">Gerencie e refine suas visualizações arquitetônicas com IA</p>
+          <h1 className="text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-zinc-500 dark:from-blue-400 dark:via-zinc-200 dark:to-zinc-400">Meus Projetos</h1>
+          <p className="text-zinc-500 dark:text-zinc-400 text-lg font-light">Gerencie e refine suas visualizações arquitetônicas com IA</p>
         </div>
         <button 
           onClick={() => navigate('/editor')}
@@ -71,7 +71,7 @@ export const Dashboard: React.FC = () => {
         {MOCK_PROJECTS.map((project, index) => (
           <div 
             key={project.id} 
-            className="group glass-panel rounded-2xl overflow-hidden hover:border-blue-500/40 transition-all duration-500 cursor-pointer flex flex-col animate-fade-in-up"
+            className="group glass-panel rounded-2xl overflow-hidden hover:border-blue-500/40 transition-all duration-500 cursor-pointer flex flex-col animate-fade-in-up bg-white dark:bg-[#121214]/60 border-black/5 dark:border-white/10"
             style={{ animationDelay: `${index * 100}ms` }}
             onClick={() => navigate('/editor')}
           >
@@ -81,7 +81,7 @@ export const Dashboard: React.FC = () => {
                 alt={project.name} 
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0c] via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
               
               {/* Overlay Actions */}
               <div className="absolute top-0 left-0 w-full p-4 flex justify-between items-start opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-[-10px] group-hover:translate-y-0">
@@ -101,18 +101,18 @@ export const Dashboard: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-6 flex flex-col flex-1 bg-gradient-to-b from-transparent to-black/20">
+            <div className="p-6 flex flex-col flex-1 bg-white dark:bg-transparent">
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors tracking-tight">{project.name}</h3>
-                <p className="text-sm text-zinc-400 line-clamp-2 leading-relaxed">{project.description}</p>
+                <h3 className="text-xl font-bold text-theme-title mb-2 group-hover:text-blue-400 transition-colors tracking-tight">{project.name}</h3>
+                <p className="text-sm text-theme-body line-clamp-2 leading-relaxed">{project.description}</p>
               </div>
-              <div className="flex items-center justify-between pt-5 mt-4 border-t border-white/5">
+              <div className="flex items-center justify-between pt-5 mt-4 border-t border-zinc-100 dark:border-white/5">
                  <div className="flex items-center gap-2 text-xs text-zinc-500">
                   <Clock size={14} className="text-blue-500" />
                   <span>Editado {project.lastModified}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-zinc-800 to-black border border-white/10 flex items-center justify-center text-[10px] text-zinc-300 font-bold shadow-inner">JS</div>
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-black border border-black/5 dark:border-white/10 flex items-center justify-center text-[10px] text-zinc-600 dark:text-zinc-300 font-bold shadow-inner">JS</div>
                 </div>
               </div>
             </div>

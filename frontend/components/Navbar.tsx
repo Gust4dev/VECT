@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Bell, Settings, LayoutGrid, PenTool, MessageSquare, Mail, User, Moon, Globe, CreditCard, LogOut, ChevronRight } from 'lucide-react';
+import { Bell, Settings, LayoutGrid, PenTool, MessageSquare, Mail, User, Moon, Sun, Globe, CreditCard, LogOut, ChevronRight } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { authService } from '../services/authService';
@@ -12,6 +13,7 @@ export const Navbar: React.FC = () => {
   const [userInitials, setUserInitials] = React.useState('U');
   const [showSettings, setShowSettings] = useState(false);
   const settingsRef = useRef<HTMLDivElement>(null);
+  const { theme, toggleTheme } = useTheme();
 
   React.useEffect(() => {
     const getUser = async () => {
@@ -38,12 +40,12 @@ export const Navbar: React.FC = () => {
 
   const handleLogout = async () => {
     await authService.signOut();
-    navigate('/login');
+    navigate('/');
   };
 
   return (
     <nav className="sticky top-4 z-50 px-4 lg:px-8 animate-fade-in-up">
-      <div className="glass-panel rounded-2xl px-6 py-3 flex items-center justify-between shadow-2xl shadow-black/20 relative">
+      <div className="bg-white/90 dark:bg-[#121214]/90 backdrop-blur-md border border-black/5 dark:border-white/10 rounded-2xl px-6 py-3 flex items-center justify-between shadow-2xl shadow-black/5 dark:shadow-black/20 relative">
         
         {/* Logo Area */}
         <div className="flex items-center gap-8">
@@ -60,11 +62,11 @@ export const Navbar: React.FC = () => {
                   <path d="M20 20L28 16L20 12L12 16L20 20Z" fill="currentColor" fillOpacity="0.3" stroke="currentColor" strokeWidth="1"/>
                </svg>
             </div>
-            <span className="text-2xl font-bold text-white tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400 group-hover:from-blue-400 group-hover:to-blue-200 transition-all">VECT</span>
+            <span className="text-2xl font-bold text-zinc-900 dark:text-white tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 to-zinc-500 dark:from-white dark:to-zinc-400 group-hover:from-blue-400 group-hover:to-blue-200 transition-all">VECT</span>
           </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center bg-zinc-900/50 rounded-xl p-1 border border-white/5">
+          <div className="hidden md:flex items-center bg-zinc-100 dark:bg-zinc-900/50 rounded-xl p-1 border border-black/5 dark:border-white/5">
             <NavButton 
               active={isActive('/dashboard')} 
               onClick={() => navigate('/dashboard')} 
@@ -98,11 +100,11 @@ export const Navbar: React.FC = () => {
             <button 
               onClick={() => navigate('/notifications')}
               className={`relative p-2.5 transition-all rounded-full group ${
-                isActive('/notifications') ? 'bg-white/10 text-white' : 'text-zinc-400 hover:text-white hover:bg-white/10'
+                isActive('/notifications') ? 'bg-black/5 dark:bg-white/10 text-zinc-900 dark:text-white' : 'text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'
               }`}
             >
               <Bell size={20} className="group-hover:rotate-12 transition-transform duration-300" />
-              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-blue-500 rounded-full ring-2 ring-black animate-pulse"></span>
+              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-blue-500 rounded-full ring-2 ring-white dark:ring-black animate-pulse"></span>
             </button>
             
             {/* Settings Dropdown */}
@@ -110,7 +112,7 @@ export const Navbar: React.FC = () => {
               <button 
                 onClick={() => setShowSettings(!showSettings)}
                 className={`p-2.5 transition-all rounded-full group ${
-                  showSettings || isActive('/settings') ? 'bg-white/10 text-white' : 'text-zinc-400 hover:text-white hover:bg-white/10'
+                  showSettings || isActive('/settings') ? 'bg-black/5 dark:bg-white/10 text-zinc-900 dark:text-white' : 'text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10'
                 }`}
               >
                 <Settings size={20} className="group-hover:rotate-90 transition-transform duration-500" />
@@ -123,11 +125,11 @@ export const Navbar: React.FC = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute right-0 top-full mt-4 w-72 bg-[#0B0E14] border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50"
+                    className="absolute right-0 top-full mt-4 w-72 bg-white dark:bg-[#0B0E14] border border-black/5 dark:border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50"
                   >
                     <div className="p-2 space-y-1">
-                      <div className="px-3 py-2 mb-2 border-b border-white/5">
-                        <p className="text-sm font-medium text-white">Configurações Rápidas</p>
+                      <div className="px-3 py-2 mb-2 border-b border-black/5 dark:border-white/5">
+                        <p className="text-sm font-medium text-zinc-900 dark:text-white">Configurações Rápidas</p>
                       </div>
                       
                       <SettingsItem icon={<User size={16} />} label="Perfil" onClick={() => navigate('/profile')} />
@@ -137,13 +139,31 @@ export const Navbar: React.FC = () => {
                       
                       <div className="my-2 border-t border-white/5"></div>
                       
-                      <SettingsItem icon={<Moon size={16} />} label="Tema: Escuro" onClick={() => {}} />
+                      <SettingsItem 
+                        icon={theme === 'dark' ? <Moon size={16} /> : <Sun size={16} />} 
+                        label={`Tema: ${theme === 'dark' ? 'Escuro' : 'Claro'}`} 
+                        onClick={() => {
+                          // Trigger animation first
+                          const btn = document.getElementById('theme-toggle-btn');
+                          if (btn) {
+                            btn.classList.add('active');
+                            setTimeout(() => {
+                              toggleTheme();
+                              btn.classList.remove('active');
+                            }, 300); // Wait for slide animation
+                          } else {
+                            toggleTheme();
+                          }
+                        }}
+                        id="theme-toggle-btn"
+                        className="fill-animation hover:bg-transparent"
+                      />
                       
-                      <div className="my-2 border-t border-white/5"></div>
+                      <div className="my-2 border-t border-black/5 dark:border-white/5"></div>
 
                       <button 
                         onClick={() => { setShowSettings(false); navigate('/settings'); }}
-                        className="w-full flex items-center justify-between px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors group"
+                        className="w-full flex items-center justify-between px-3 py-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 rounded-lg transition-colors group"
                       >
                         <span className="flex items-center gap-3">
                           <Settings size={16} />
@@ -169,12 +189,12 @@ export const Navbar: React.FC = () => {
           </div>
           
           <div 
-            className="flex items-center gap-3 pl-5 border-l border-white/10 cursor-pointer group"
+            className="flex items-center gap-3 pl-5 border-l border-black/5 dark:border-white/10 cursor-pointer group"
             onClick={() => navigate('/profile')}
           >
             <div className="text-right hidden sm:block">
-              <p className={`text-sm font-semibold transition-colors ${isActive('/profile') ? 'text-blue-400' : 'text-white group-hover:text-blue-400'}`}>{userName}</p>
-              <p className="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">Pro Plan</p>
+              <p className={`text-sm font-semibold transition-colors ${isActive('/profile') ? 'text-blue-400' : 'text-zinc-900 dark:text-white group-hover:text-blue-400'}`}>{userName}</p>
+              <p className="text-[10px] uppercase tracking-wider text-zinc-900 dark:text-zinc-500 font-bold">Pro Plan</p>
             </div>
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold text-white transition-all duration-300 border ${
                isActive('/profile') 
@@ -197,8 +217,8 @@ const NavButton: React.FC<{ active: boolean; onClick: () => void; icon: React.Re
     onClick={onClick}
     className={`relative flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 overflow-hidden ${
       active 
-        ? 'text-white shadow-lg' 
-        : 'text-zinc-400 hover:text-white hover:bg-white/5'
+        ? 'text-zinc-900 dark:text-white shadow-lg' 
+        : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
     }`}
   >
     {active && (
@@ -217,10 +237,11 @@ const NavButton: React.FC<{ active: boolean; onClick: () => void; icon: React.Re
   </button>
 );
 
-const SettingsItem: React.FC<{ icon: React.ReactNode; label: string; onClick: () => void }> = ({ icon, label, onClick }) => (
+const SettingsItem: React.FC<{ icon: React.ReactNode; label: string; onClick: () => void; className?: string; id?: string }> = ({ icon, label, onClick, className = '', id }) => (
   <button 
+    id={id}
     onClick={onClick}
-    className="w-full flex items-center gap-3 px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+    className={`w-full flex items-center gap-3 px-3 py-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 rounded-lg transition-colors ${className}`}
   >
     {icon}
     {label}

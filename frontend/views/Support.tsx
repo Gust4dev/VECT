@@ -5,15 +5,15 @@ export const Support: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto p-8 pb-16 min-h-[calc(100vh-8rem)] animate-fade-in-up">
       <div className="mb-12">
-        <h1 className="text-4xl font-bold text-white mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">Central de Suporte</h1>
-        <p className="text-zinc-400 text-lg font-light">Estamos aqui para ajudar você a aproveitar ao máximo o VECT</p>
+        <h1 className="text-4xl font-bold text-theme-title mb-3">Central de Suporte</h1>
+        <p className="text-theme-body text-lg font-light">Estamos aqui para ajudar você a aproveitar ao máximo o VECT</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column */}
         <div className="space-y-8">
           <div className="glass-panel rounded-3xl p-8 hover:border-blue-500/30 transition-all duration-500">
-            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+            <h3 className="text-xl font-bold text-theme-title mb-6 flex items-center gap-2">
                <span className="w-1 h-6 bg-blue-500 rounded-full"></span>
                Fale Conosco
             </h3>
@@ -25,7 +25,7 @@ export const Support: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-xs text-zinc-500 uppercase tracking-wide font-bold mb-1">Email</p>
-                  <p className="text-zinc-200 font-medium group-hover:text-blue-400 transition-colors">suporte@vect.ai</p>
+                  <p className="text-theme-subtitle font-medium group-hover:text-blue-400 transition-colors">suporte@vect.ai</p>
                 </div>
               </div>
 
@@ -35,7 +35,7 @@ export const Support: React.FC = () => {
                 </div>
                 <div>
                    <p className="text-xs text-zinc-500 uppercase tracking-wide font-bold mb-1">Telefone</p>
-                  <p className="text-zinc-200 font-medium group-hover:text-blue-400 transition-colors">+55 11 99999-9999</p>
+                  <p className="text-theme-subtitle font-medium group-hover:text-blue-400 transition-colors">+55 11 99999-9999</p>
                 </div>
               </div>
 
@@ -45,14 +45,14 @@ export const Support: React.FC = () => {
                 </div>
                 <div>
                    <p className="text-xs text-zinc-500 uppercase tracking-wide font-bold mb-1">Horário</p>
-                  <p className="text-zinc-200 font-medium">Seg - Sex: 9h às 18h</p>
+                  <p className="text-theme-subtitle font-medium">Seg - Sex: 9h às 18h</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="glass-panel rounded-3xl p-8 bg-gradient-to-br from-blue-900/10 to-transparent border-blue-500/20">
-            <h3 className="text-lg font-bold text-white mb-6">Status do Serviço</h3>
+            <h3 className="text-lg font-bold text-theme-title mb-6">Status do Serviço</h3>
             <div className="space-y-5">
                <div className="space-y-2">
                   <div className="flex justify-between items-center text-sm">
@@ -78,20 +78,20 @@ export const Support: React.FC = () => {
                     <MessageSquare size={28} />
                 </div>
                 <div>
-                    <h3 className="text-2xl font-bold text-white">Abrir Ticket</h3>
-                    <p className="text-zinc-400 text-sm">Descreva seu problema e nossa equipe técnica analisará</p>
+                    <h3 className="text-2xl font-bold text-theme-title">Abrir Ticket</h3>
+                    <p className="text-theme-body text-sm">Descreva seu problema e nossa equipe técnica analisará</p>
                 </div>
             </div>
 
             <form className="space-y-6 relative z-10">
                 <div className="group">
                     <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 ml-1 group-focus-within:text-blue-400 transition-colors">Assunto</label>
-                    <input type="text" placeholder="Ex: Problema ao exportar render" className="w-full bg-black/20 border border-zinc-700/50 rounded-xl px-5 py-4 text-white placeholder-zinc-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all focus:bg-black/40" />
+                    <input type="text" placeholder="Ex: Problema ao exportar render" className="w-full input-theme rounded-xl px-5 py-4 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all" />
                 </div>
 
                 <div className="group">
                 <label className="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 ml-1 group-focus-within:text-blue-400 transition-colors">Mensagem</label>
-                <textarea placeholder="Descreva seu problema em detalhes..." className="w-full h-56 bg-black/20 border border-zinc-700/50 rounded-xl px-5 py-4 text-white placeholder-zinc-600 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all resize-none focus:bg-black/40"></textarea>
+                <textarea placeholder="Descreva seu problema em detalhes..." className="w-full h-56 input-theme rounded-xl px-5 py-4 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all resize-none"></textarea>
                 </div>
 
                 <div className="pt-2">
@@ -104,7 +104,7 @@ export const Support: React.FC = () => {
             </div>
 
             <div className="glass-panel rounded-3xl p-8">
-                <h3 className="text-xl font-bold text-white mb-6 px-2">Perguntas Frequentes</h3>
+                <h3 className="text-xl font-bold text-theme-title mb-6 px-2">Perguntas Frequentes</h3>
                 <div className="space-y-2">
                     {[
                         "Como posso gerar um novo render?",
@@ -113,7 +113,7 @@ export const Support: React.FC = () => {
                         "Como alterar meu plano?"
                     ].map((question, i) => (
                         <div key={i} className="group border border-white/5 hover:border-blue-500/30 bg-white/5 hover:bg-white/10 rounded-xl p-4 cursor-pointer transition-all duration-300 flex justify-between items-center">
-                            <span className="text-zinc-300 font-medium group-hover:text-white">{question}</span>
+                            <span className="text-theme-subtitle font-medium group-hover:text-white">{question}</span>
                             <ChevronRight size={18} className="text-zinc-500 group-hover:text-blue-400 group-hover:translate-x-1 transition-all" />
                         </div>
                     ))}

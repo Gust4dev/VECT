@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Moon, Bell, Shield, Monitor, Globe, CreditCard, ChevronRight, Check } from 'lucide-react';
+import { Moon, Bell, Shield, Sun, Monitor, Globe, CreditCard, ChevronRight, Check } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 export const Settings: React.FC = () => {
   const [emailNotif, setEmailNotif] = useState(true);
   const [pushNotif, setPushNotif] = useState(true);
   const [highQuality, setHighQuality] = useState(true);
   const [autoSave, setAutoSave] = useState(true);
+  const { theme, setTheme } = useTheme();
 
   return (
     <div className="max-w-5xl mx-auto p-8 pb-16 min-h-[calc(100vh-8rem)] animate-fade-in-up">
@@ -71,8 +73,18 @@ export const Settings: React.FC = () => {
                             <p className="text-xs text-zinc-500 mt-1">Selecione a aparência do editor</p>
                         </div>
                         <div className="flex gap-2 bg-black/40 p-1 rounded-lg border border-white/10">
-                            <button className="p-2 rounded-md bg-zinc-800 text-white shadow"><Moon size={16}/></button>
-                            <button className="p-2 rounded-md text-zinc-500 hover:text-zinc-300"><Monitor size={16}/></button>
+                            <button 
+                                onClick={() => setTheme('dark')}
+                                className={`p-2 rounded-md transition-all ${theme === 'dark' ? 'bg-zinc-800 text-white shadow' : 'text-zinc-500 hover:text-zinc-300'}`}
+                            >
+                                <Moon size={16}/>
+                            </button>
+                            <button 
+                                onClick={() => setTheme('light')}
+                                className={`p-2 rounded-md transition-all ${theme === 'light' ? 'bg-white text-black shadow' : 'text-zinc-500 hover:text-zinc-300'}`}
+                            >
+                                <Sun size={16}/>
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -49,8 +49,8 @@ export const Notifications: React.FC = () => {
     <div className="max-w-3xl mx-auto p-8 pb-16 min-h-[calc(100vh-8rem)] animate-fade-in-up">
       <div className="flex items-end justify-between mb-8">
         <div>
-          <h1 className="text-4xl font-bold text-white mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">Notificações</h1>
-          <p className="text-zinc-400 text-lg font-light">Fique por dentro das atualizações do seu workspace</p>
+          <h1 className="text-4xl font-bold text-theme-title mb-2">Notificações</h1>
+          <p className="text-theme-body text-lg font-light">Fique por dentro das atualizações do seu workspace</p>
         </div>
         <div className="flex gap-2">
             <button className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-zinc-400 hover:text-white transition-colors border border-white/5">
@@ -81,13 +81,13 @@ export const Notifications: React.FC = () => {
                 
                 <div className="flex-1">
                     <div className="flex justify-between items-start mb-1">
-                        <h4 className={`font-bold text-base ${!notif.read ? 'text-white' : 'text-zinc-300'}`}>{notif.title}</h4>
+                        <h4 className={`font-bold text-base ${!notif.read ? 'text-theme-title' : 'text-theme-subtitle'}`}>{notif.title}</h4>
                         <div className="flex items-center gap-2 text-xs text-zinc-500">
                              <Clock size={12} />
                              {notif.time}
                         </div>
                     </div>
-                    <p className="text-zinc-400 text-sm leading-relaxed">{notif.desc}</p>
+                    <p className="text-theme-body text-sm leading-relaxed">{notif.desc}</p>
                 </div>
                 
                 {!notif.read && (
@@ -98,7 +98,7 @@ export const Notifications: React.FC = () => {
       </div>
       
       <div className="mt-8 text-center">
-          <button className="text-sm text-zinc-500 hover:text-zinc-300 transition-colors">Carregar anteriores...</button>
+          <button className="text-sm text-theme-body hover:text-theme-subtitle transition-colors">Carregar anteriores...</button>
       </div>
     </div>
   );

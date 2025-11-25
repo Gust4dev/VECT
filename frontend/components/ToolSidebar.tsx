@@ -14,7 +14,7 @@ export const ToolSidebar: React.FC<ToolSidebarProps> = ({ activeTool, setActiveT
     <aside className="w-72 glass-panel border-r-0 border-zinc-800/50 rounded-r-2xl flex flex-col py-6 px-4 gap-3 h-[calc(100vh-8rem)] my-4 ml-4 overflow-y-auto custom-scrollbar animate-fade-in-up delay-100 z-20">
       <div className="flex items-center gap-2 mb-4 px-2">
         <div className="w-1 h-5 bg-blue-500 rounded-full"></div>
-        <div className="text-sm font-bold text-white tracking-wide uppercase">Ferramentas</div>
+        <div className="text-sm font-bold text-theme-title tracking-wide uppercase">Ferramentas</div>
       </div>
       
       {/* Primary Tools */}
@@ -121,7 +121,7 @@ const ToolButton: React.FC<{ active: boolean; onClick: () => void; icon: React.R
       {icon}
     </div>
     <div className="flex flex-col">
-      <span className={`text-sm font-medium transition-colors ${active ? 'text-white' : 'text-zinc-300 group-hover:text-white'}`}>{label}</span>
+      <span className={`text-sm font-medium transition-colors ${active ? 'text-white' : 'text-theme-subtitle group-hover:text-white'}`}>{label}</span>
       <span className={`text-[10px] transition-colors ${active ? 'text-blue-200' : 'text-zinc-600 group-hover:text-zinc-500'}`}>{desc}</span>
     </div>
   </button>

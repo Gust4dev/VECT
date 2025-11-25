@@ -104,11 +104,16 @@ const Login = () => {
             </button>
           </form>
 
-          <div className="mt-8 text-center">
+          <div className="mt-8 text-center space-y-3">
             <p className="text-zinc-400 text-sm">
               Não tem uma conta?{' '}
               <button onClick={() => navigate('/register')} className="text-blue-400 font-bold hover:text-blue-300 transition-colors">
                 Criar conta gratuita
+              </button>
+            </p>
+            <p className="text-zinc-500 text-sm">
+              <button onClick={() => navigate('/')} className="text-zinc-400 hover:text-white transition-colors flex items-center gap-1 mx-auto">
+                ← Voltar ao início
               </button>
             </p>
           </div>
