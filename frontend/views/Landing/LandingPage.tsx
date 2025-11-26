@@ -1,154 +1,15 @@
-import React, { useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, Float, RoundedBox, ContactShadows } from '@react-three/drei';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Check, Zap, Layers, Image as ImageIcon, Cpu } from 'lucide-react';
+import { ArrowRight, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import * as THREE from 'three';
+import { VectLogo3D } from '../../components/VectLogo3D';
 
-// --- 3D Components ---
-
-// --- 3D Components ---
-
-// --- 3D Components ---
-
-// --- 3D Components ---
-
-
-
-const ModernVilla = () => {
-  return (
-    <group rotation={[0, -Math.PI / 5, 0]} position={[0, -1, 0]}>
-      {/* --- Ground/Base --- */}
-      <RoundedBox args={[7, 0.2, 7]} radius={0.05} smoothness={4} position={[0, -0.1, 0]} receiveShadow>
-        <meshStandardMaterial color="#111111" roughness={0.8} />
-      </RoundedBox>
-
-      {/* --- Main Concrete Structure (Ground Floor) --- */}
-      <RoundedBox args={[3.5, 1.2, 4]} radius={0.05} smoothness={4} position={[-0.5, 0.6, 0]} castShadow receiveShadow>
-        <meshStandardMaterial color="#e5e5e5" roughness={0.2} metalness={0.1} />
-      </RoundedBox>
-
-      {/* --- Upper Floor (Cantilever) --- */}
-      <RoundedBox args={[4, 1.2, 3.5]} radius={0.05} smoothness={4} position={[0.5, 1.8, 0.5]} castShadow receiveShadow>
-        <meshStandardMaterial color="#2a2a2a" roughness={0.5} metalness={0.2} />
-      </RoundedBox>
-
-      {/* --- Wood Accent Panel --- */}
-      <RoundedBox args={[0.1, 1.2, 2]} radius={0.02} smoothness={4} position={[2.5, 1.8, 1]} castShadow>
-        <meshStandardMaterial color="#8B5A2B" roughness={0.8} />
-      </RoundedBox>
-
-      {/* --- Glass Windows --- */}
-      {/* Ground Floor Large Window */}
-      <mesh position={[1.26, 0.6, 0.5]}>
-        <boxGeometry args={[0.1, 1, 2.5]} />
-        <meshPhysicalMaterial 
-          color="#88ccff" 
-          metalness={0.1} 
-          roughness={0} 
-          transmission={0.9} 
-          thickness={0.5}
-          transparent
-          opacity={0.5}
-        />
-      </mesh>
-      
-      {/* Upper Floor Panoramic Window */}
-      <mesh position={[0.5, 1.8, 2.26]}>
-        <boxGeometry args={[3.8, 1, 0.1]} />
-        <meshPhysicalMaterial 
-          color="#skyblue" 
-          metalness={0.1} 
-          roughness={0} 
-          transmission={0.9} 
-          thickness={0.5}
-          transparent 
-          opacity={0.5}
-        />
-      </mesh>
-
-      {/* --- Pool Area --- */}
-      <group position={[2, 0.1, 2]}>
-        {/* Water */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.05, 0]}>
-          <planeGeometry args={[2.5, 2]} />
-          <meshPhysicalMaterial color="#00ffff" transmission={0.6} roughness={0} metalness={0.5} />
-        </mesh>
-        {/* Pool Border */}
-        <RoundedBox args={[2.7, 0.15, 0.2]} radius={0.02} smoothness={4} position={[0, 0, 1.1]} castShadow>
-           <meshStandardMaterial color="#333" />
-        </RoundedBox>
-        <RoundedBox args={[2.7, 0.15, 0.2]} radius={0.02} smoothness={4} position={[0, 0, -1.1]} castShadow>
-           <meshStandardMaterial color="#333" />
-        </RoundedBox>
-        <RoundedBox args={[0.2, 0.15, 2.4]} radius={0.02} smoothness={4} position={[1.35, 0, 0]} castShadow>
-           <meshStandardMaterial color="#333" />
-        </RoundedBox>
-      </group>
-
-      {/* --- Abstract Vegetation --- */}
-      <group position={[-2.5, 0.5, 2.5]}>
-         <mesh castShadow position={[0, 0.5, 0]}>
-            <sphereGeometry args={[0.6, 32, 32]} />
-            <meshStandardMaterial color="#2d4c1e" roughness={0.8} />
-         </mesh>
-         <mesh position={[0, -0.2, 0]}>
-            <cylinderGeometry args={[0.1, 0.15, 1]} />
-            <meshStandardMaterial color="#3e2723" />
-         </mesh>
-      </group>
-
-    </group>
-  );
-};
-
-const Scene = () => {
-  return (
-    <>
-      <PerspectiveCamera makeDefault position={[8, 5, 10]} fov={40} />
-      <OrbitControls 
-        enableZoom={false} 
-        autoRotate 
-        autoRotateSpeed={0.5} 
-        minPolarAngle={Math.PI / 3} 
-        maxPolarAngle={Math.PI / 2.1} 
-      />
-      
-      {/* Professional Studio Lighting - Brightened */}
-      <ambientLight intensity={0.8} />
-      <spotLight 
-        position={[10, 10, 10]} 
-        angle={0.15} 
-        penumbra={1} 
-        intensity={2.5} 
-        castShadow 
-        shadow-mapSize={[2048, 2048]} 
-      />
-      <pointLight position={[-10, -10, -10]} intensity={1} color="#3399FF" />
-      <directionalLight position={[-5, 5, 5]} intensity={1.5} color="#ffffff" />
-      
-      {/* Rim Light for separation */}
-      <spotLight position={[0, 5, -10]} intensity={2} color="#ffffff" angle={0.5} penumbra={1} />
-      
-      {/* Soft Ground Shadows for Realism */}
-      <ContactShadows 
-        resolution={1024} 
-        scale={20} 
-        blur={2} 
-        opacity={0.5} 
-        far={10} 
-        color="#000000" 
-      />
-
-      <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.2}>
-        <ModernVilla />
-      </Float>
-    </>
-  );
-};
-
-// --- UI Components ---
+const Stat = ({ value, label }: { value: string, label: string }) => (
+  <div className="text-center px-4 border-l border-white/10 first:border-0">
+    <div className="text-2xl md:text-3xl font-bold text-white mb-1 tracking-tight">{value}</div>
+    <div className="text-[10px] md:text-xs text-zinc-500 uppercase tracking-widest font-bold">{label}</div>
+  </div>
+);
 
 const FeatureCard = ({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) => (
   <motion.div 
@@ -163,13 +24,6 @@ const FeatureCard = ({ icon, title, desc }: { icon: React.ReactNode, title: stri
   </motion.div>
 );
 
-const Stat = ({ value, label }: { value: string, label: string }) => (
-  <div className="text-center">
-    <div className="text-4xl md:text-5xl font-bold text-white mb-2 bg-clip-text text-transparent bg-gradient-to-b from-white to-zinc-500">{value}</div>
-    <div className="text-sm text-zinc-500 uppercase tracking-wider font-medium">{label}</div>
-  </div>
-);
-
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
 
@@ -179,7 +33,7 @@ export const LandingPage: React.FC = () => {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 transition-all duration-300 bg-[#05070a]/80 backdrop-blur-lg border-b border-white/5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
             <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-xl flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/20">V</div>
             <span className="text-2xl font-bold tracking-tight">VECT</span>
           </div>
@@ -197,7 +51,6 @@ export const LandingPage: React.FC = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-        {/* Background Gradients */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/20 blur-[120px] rounded-full opacity-20 pointer-events-none"></div>
         <div className="absolute bottom-0 right-0 w-[800px] h-[600px] bg-cyan-600/10 blur-[100px] rounded-full opacity-20 pointer-events-none"></div>
 
@@ -208,21 +61,25 @@ export const LandingPage: React.FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            className="pointer-events-none"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-8 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-8 shadow-[0_0_20px_rgba(59,130,246,0.2)] pointer-events-auto">
               <Zap size={14} />
               Versão Beta Disponível
             </div>
+            
             <h1 className="text-6xl md:text-8xl font-bold leading-[0.95] mb-8 tracking-tight">
-              Design <br />
+              Renderize na <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-white">
-                Inteligente.
+                velocidade do pensamento.
               </span>
             </h1>
+            
             <p className="text-xl text-zinc-400 mb-10 max-w-lg leading-relaxed font-light">
-              O VECT funde a precisão da modelagem arquitetônica com a criatividade ilimitada da IA Generativa.
+              Transforme volumetria básica em visualização fotorrealista instantaneamente. Preserve sua geometria, altere apenas o necessário.
             </p>
-            <div className="flex flex-col sm:flex-row gap-5">
+            
+            <div className="flex flex-col sm:flex-row gap-5 pointer-events-auto">
               <button 
                 onClick={() => navigate('/register')}
                 className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-lg shadow-[0_0_40px_rgba(37,99,235,0.4)] hover:shadow-[0_0_60px_rgba(37,99,235,0.6)] transition-all flex items-center justify-center gap-3 group"
@@ -235,46 +92,23 @@ export const LandingPage: React.FC = () => {
               </button>
             </div>
 
-            <div className="mt-16 flex items-center gap-8 border-t border-white/5 pt-8">
-              <Stat value="Nuvem" label="Render via GPU" />
-              <div className="w-px h-12 bg-white/10"></div>
-              <Stat value="AI Inpainting" label="Powered by VECT" />
-              <div className="w-px h-12 bg-white/10"></div>
-              <Stat value="Atualizações" label="Semanais" />
+            <div className="mt-16 flex items-center gap-2 border-t border-white/5 pt-8 pointer-events-auto">
+              <Stat value="0.2s" label="Tempo de Resposta" />
+              <Stat value="4K" label="Exportação UHD" />
+              <Stat value="100%" label="Geometria Preservada" />
             </div>
           </motion.div>
 
-          {/* 3D Content */}
+          {/* 3D Logo */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="h-[600px] lg:h-[800px] w-full relative cursor-grab active:cursor-grabbing"
+            className="h-[600px] lg:h-[800px] w-full relative"
           >
-            {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/5 blur-[100px] rounded-full pointer-events-none"></div>
             
-            <Canvas className="z-10" dpr={[1, 2]} shadows>
-              <React.Suspense fallback={null}>
-                <Scene />
-              </React.Suspense>
-            </Canvas>
-            
-            {/* Floating UI Elements around 3D */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              className="absolute top-1/4 right-0 bg-black/40 backdrop-blur-md border border-white/10 p-4 rounded-2xl max-w-[200px]"
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                <span className="text-xs font-bold text-zinc-300">Renderizando...</span>
-              </div>
-              <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                <div className="h-full bg-blue-500 w-2/3"></div>
-              </div>
-            </motion.div>
+            <VectLogo3D />
           </motion.div>
         </div>
       </section>
@@ -291,19 +125,19 @@ export const LandingPage: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FeatureCard 
-              icon={<Layers size={28} />}
+              icon={<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
               title="O Fim da Renderização Lenta"
-              desc="O mercado exige velocidade. O VECT elimina as horas de espera do V-Ray e Lumion, entregando resultados instantâneos."
+              desc="O mercado exige velocidade. O VECT elimina as horas de espera, entregando resultados instantâneos."
             />
-             <FeatureCard 
-              icon={<Cpu size={28} />}
+            <FeatureCard 
+              icon={<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>}
               title="Inteligência Generativa"
-              desc="Não apenas filtros. O VECT entende geometria e materiais, permitindo iterações de design que antes levavam dias."
+              desc="Não apenas filtros. O VECT entende geometria e materiais, permitindo iterações que antes levavam dias."
             />
-             <FeatureCard 
-              icon={<ImageIcon size={28} />}
+            <FeatureCard 
+              icon={<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>}
               title="Futuro da Arquitetura"
-              desc="Integração direta com fluxos BIM e CAD. O VECT não substitui o arquiteto, ele o torna 10x mais produtivo."
+              desc="Integração com fluxos BIM e CAD. O VECT não substitui o arquiteto, ele o torna 10x mais produtivo."
             />
           </div>
         </div>
