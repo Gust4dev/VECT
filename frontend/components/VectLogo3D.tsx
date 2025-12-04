@@ -64,7 +64,7 @@ export const VectLogoMesh = () => {
   const middleLinesRef = useRef<THREE.LineSegments>(null);
   
   const { size, gl } = useThree();
-  const scale = size.width < 768 ? 0.6 : 1.0;
+  const scale = size.width < 768 ? 0.8 : 1.8;
 
   // Sistema de rotação manual e automática
   const isDragging = useRef(false);

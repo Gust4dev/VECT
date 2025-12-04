@@ -11,7 +11,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Outfit', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',

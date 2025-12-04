@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, Zap } from 'lucide-react';
+import { ArrowRight, Zap, Cpu, Image, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { VectLogo3D } from '../../components/VectLogo3D';
+import { SmoothScroll } from '../../components/landing/SmoothScroll';
 
+// --- COMPONENTS ---
 const Stat = ({ value, label }: { value: string, label: string }) => (
   <div className="text-center px-4 border-l border-white/10 first:border-0">
     <div className="text-2xl md:text-3xl font-bold text-white mb-1 tracking-tight">{value}</div>
@@ -11,26 +13,34 @@ const Stat = ({ value, label }: { value: string, label: string }) => (
   </div>
 );
 
-const FeatureCard = ({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) => (
+const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
   <motion.div 
     variants={{
       hidden: { opacity: 0, y: 30 },
       visible: { opacity: 1, y: 0, transition: { duration: 1.0, ease: "easeOut" } }
     }}
     whileHover={{ y: -10 }}
-    className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 hover:border-blue-500/30 transition-all group cursor-default"
+    className="p-8 rounded-3xl bg-white/5 border border-white/5 backdrop-blur-md hover:bg-white/10 hover:border-blue-500/30 transition-all group cursor-default"
   >
     <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600/20 to-cyan-500/20 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform duration-500 border border-blue-500/10">
       {icon}
     </div>
     <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">{title}</h3>
-    <p className="text-zinc-400 leading-relaxed">{desc}</p>
+    <p className="text-zinc-400 leading-relaxed">{description}</p>
   </motion.div>
 );
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: "easeOut" } }
+// --- PREMIUM ANIMATION VARIANTS ---
+const premiumFadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      duration: 0.8, 
+      ease: [0.22, 1, 0.36, 1] // "Luxury" ease (custom cubic-bezier)
+    } 
+  }
 };
 
 const staggerContainer = {
@@ -38,37 +48,17 @@ const staggerContainer = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.3,
+      staggerChildren: 0.15,
       delayChildren: 0.2
     }
   }
 };
-
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } }
-};
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1.2, ease: "easeOut" } }
-};
-
-const zoomIn = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 1.0, ease: "easeOut" } }
-};
-
-import { SmoothScroll } from '../../components/landing/SmoothScroll';
 
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
   const { scrollY } = useScroll();
   
   // --- LIQUID DEPTH PARALLAX ---
-  // The key here is subtle, massive movement for the background, 
-  // and faster movement for the mid-ground to create the "window" effect.
-
   // Force scroll to top on refresh
   React.useEffect(() => {
     window.history.scrollRestoration = 'manual';
@@ -76,7 +66,7 @@ export const LandingPage: React.FC = () => {
   }, []);
 
   // Layer 1: The Deep Void (Massive, Slow)
-  const deepY = useTransform(scrollY, [0, 8000], [0, 500]); // Moves very slowly
+  const deepY = useTransform(scrollY, [0, 8000], [0, 500]); 
   const deepRotate = useTransform(scrollY, [0, 8000], [0, 10]);
 
   // Layer 2: The Ethereal Forms (Mid-speed)
@@ -156,63 +146,86 @@ export const LandingPage: React.FC = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden z-10">
+      {/* Hero Section - Magazine Cover Style */}
+      <section className="relative min-h-screen flex flex-col justify-center items-center pt-20 overflow-hidden z-10">
         
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full relative">
+        {/* Massive Typography Layer - Behind Logo */}
+        <motion.div 
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0 select-none"
+        >
+          <h1 className="text-[10vw] leading-[0.8] font-serif italic text-white/5 mix-blend-overlay tracking-tighter whitespace-nowrap">
+            SUA VISÃO
+          </h1>
+          <h1 className="text-[10vw] leading-[0.8] font-poppins font-black text-white/5 mix-blend-overlay tracking-tighter whitespace-nowrap">
+            MATERIALIZADA
+          </h1>
+        </motion.div>
+
+        <div className="max-w-[90vw] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center w-full relative z-10">
           
-          {/* Text Content */}
+          {/* Text Content - Spans 7 columns on large screens */}
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="pointer-events-none"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            className="pointer-events-none relative z-20 lg:col-span-7"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider mb-8 shadow-[0_0_20px_rgba(59,130,246,0.2)] pointer-events-auto">
-              <Zap size={14} />
-              Versão Beta Disponível
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/60 text-xs font-bold uppercase tracking-widest mb-10 backdrop-blur-md pointer-events-auto">
+              <Zap size={12} className="text-blue-400" />
+              VECT 2.0 Beta
             </div>
             
-            <h1 className="text-6xl md:text-8xl font-bold leading-[0.95] mb-8 tracking-tight">
-              Renderize na <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-white">
-                velocidade do pensamento.
-              </span>
-            </h1>
+            <div className="relative mb-12 w-full">
+              <h1 className="text-[4vw] lg:text-[4.5vw] font-serif italic text-white leading-[0.9] tracking-tight mb-2 whitespace-nowrap">
+                Sua Visão.
+              </h1>
+              {/* Force single line with whitespace-nowrap and responsive sizing */}
+              <h1 className="text-[5vw] lg:text-[6vw] font-poppins font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/50 leading-[1.1] tracking-tighter whitespace-nowrap py-2">
+                MATERIALIZADA.
+              </h1>
+            </div>
             
-            <p className="text-xl text-zinc-400 mb-10 max-w-lg leading-relaxed font-light">
-              Transforme volumetria básica em visualização fotorrealista instantaneamente. Preserve sua geometria, altere apenas o necessário.
+            <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-lg leading-relaxed font-light border-l-2 border-white/10 pl-6">
+              A nova era da visualização arquitetônica. <br/>
+              <span className="text-white font-medium">Renderize o impossível em segundos.</span>
             </p>
             
             <div className="flex flex-col sm:flex-row gap-5 pointer-events-auto">
               <button 
                 onClick={() => navigate('/register')}
-                className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-lg shadow-[0_0_40px_rgba(37,99,235,0.4)] hover:shadow-[0_0_60px_rgba(37,99,235,0.6)] transition-all flex items-center justify-center gap-3 group"
+                className="px-10 py-5 bg-white text-black rounded-full font-bold text-lg shadow-[0_0_40px_rgba(255,255,255,0.2)] hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] hover:scale-105 transition-all flex items-center justify-center gap-3 group"
               >
-                Começar Gratuitamente
+                Começar Agora
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-2xl font-bold text-lg transition-all backdrop-blur-sm">
-                Ver Demo
+              <button className="px-10 py-5 bg-transparent border border-white/20 hover:bg-white/5 text-white rounded-full font-bold text-lg transition-all backdrop-blur-sm flex items-center gap-3">
+                Showcase
+                <Image size={18} className="text-zinc-400" />
               </button>
             </div>
 
-            <div className="mt-16 flex items-center gap-2 border-t border-white/5 pt-8 pointer-events-auto">
-              <Stat value="0.2s" label="Tempo de Resposta" />
-              <Stat value="4K" label="Exportação UHD" />
-              <Stat value="100%" label="Geometria Preservada" />
+            <div className="mt-20 flex items-center gap-12 text-zinc-500 font-mono text-xs tracking-widest uppercase">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                System Online
+              </div>
+              <div>v2.0.4-beta</div>
+              <div>Lat: 24ms</div>
             </div>
           </motion.div>
 
-          {/* 3D Logo */}
+          {/* 3D Logo Container - Spans 5 columns */}
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-            className="h-[600px] lg:h-[800px] w-full relative"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, delay: 0.4, ease: "easeOut" }}
+            className="h-[500px] lg:h-[800px] w-full relative z-10 flex items-center justify-center lg:justify-end lg:col-span-5"
           >
-            {/* Logo Glow - kept local to logo but reduced intensity as main background handles ambience */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-white/5 blur-[80px] rounded-full pointer-events-none"></div>
+            {/* Architectural Grid Background for Logo */}
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none"></div>
             
             <VectLogo3D />
           </motion.div>
@@ -225,25 +238,25 @@ export const LandingPage: React.FC = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px", amount: 0.3 }}
+            viewport={{ once: true, amount: 0.3 }}
             variants={staggerContainer}
             className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center"
           >
-            <motion.div variants={fadeInUp}>
+            <motion.div variants={premiumFadeUp}>
               <div className="text-5xl font-bold text-white mb-2">30%</div>
               <div className="text-zinc-400 text-sm uppercase tracking-widest font-bold mb-4">do Tempo de Projeto</div>
               <p className="text-zinc-500 leading-relaxed">
                 Arquitetos perdem quase um terço do tempo de projeto configurando luzes, texturas e renderizando cenas de teste.
               </p>
             </motion.div>
-            <motion.div variants={fadeInUp}>
+            <motion.div variants={premiumFadeUp}>
               <div className="text-5xl font-bold text-white mb-2">R$ 2.5k+</div>
               <div className="text-zinc-400 text-sm uppercase tracking-widest font-bold mb-4">Custo Médio por Imagem</div>
               <p className="text-zinc-500 leading-relaxed">
                 Estúdios de visualização cobram caro e levam dias. Alterações custam extra e atrasam a entrega final.
               </p>
             </motion.div>
-            <motion.div variants={fadeInUp}>
+            <motion.div variants={premiumFadeUp}>
               <div className="text-5xl font-bold text-white mb-2">48h</div>
               <div className="text-zinc-400 text-sm uppercase tracking-widest font-bold mb-4">Ciclo de Feedback</div>
               <p className="text-zinc-500 leading-relaxed">
@@ -260,8 +273,8 @@ export const LandingPage: React.FC = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2, margin: "-50px" }}
-            variants={fadeInUp}
+            viewport={{ once: true, amount: 0.5 }}
+            variants={premiumFadeUp}
             className="mb-20 text-center"
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">A Evolução do Workflow</h2>
@@ -271,13 +284,13 @@ export const LandingPage: React.FC = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 overflow-hidden">
-            {/* Traditional */}
+            {/* Traditional - REMOVED OPACITY-60 CLASS */}
             <motion.div 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.2, margin: "-50px" }}
-              variants={fadeInLeft}
-              className="p-10 rounded-3xl bg-white/5 border border-white/10 opacity-60 hover:opacity-100 transition-opacity"
+              viewport={{ once: true, amount: 0.2, margin: "-100px" }}
+              variants={premiumFadeUp}
+              className="p-10 rounded-3xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors"
             >
               <h3 className="text-2xl font-bold text-zinc-400 mb-8 flex items-center gap-3">
                 <span className="w-3 h-3 rounded-full bg-zinc-600"></span>
@@ -311,38 +324,35 @@ export const LandingPage: React.FC = () => {
             <motion.div 
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.2, margin: "-50px" }}
-              variants={fadeInRight}
+              viewport={{ once: true, amount: 0.2, margin: "-100px" }}
+              variants={premiumFadeUp}
               className="p-10 rounded-3xl bg-gradient-to-b from-blue-900/20 to-blue-900/5 border border-blue-500/30 relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-400"></div>
               <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-                <span className="w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"></span>
-                VECT Workflow
+                <span className="w-3 h-3 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></span>
+                Workflow VECT
               </h3>
               <div className="space-y-6">
                 <div className="flex items-center justify-between text-zinc-300 border-b border-blue-500/10 pb-4">
-                  <span>Modelagem 3D (Básica)</span>
-                  <span>4-8 Horas</span>
+                  <span>Importação do Modelo</span>
+                  <span>Instantâneo</span>
                 </div>
-                <div className="flex items-center justify-between text-blue-300 border-b border-blue-500/10 pb-4">
-                  <span>VECT AI Rendering</span>
-                  <span className="font-bold flex items-center gap-2">
-                    <Zap size={14} />
-                    Instantâneo
-                  </span>
+                <div className="flex items-center justify-between text-zinc-300 border-b border-blue-500/10 pb-4">
+                  <span>Sugestão de Materiais (IA)</span>
+                  <span>~2 Minutos</span>
                 </div>
-                <div className="flex items-center justify-between text-zinc-500 border-b border-blue-500/10 pb-4 opacity-50">
-                  <span className="line-through">Configuração de Materiais</span>
-                  <span>0 min</span>
+                <div className="flex items-center justify-between text-zinc-300 border-b border-blue-500/10 pb-4">
+                  <span>Iluminação Automática</span>
+                  <span>Automático</span>
                 </div>
-                <div className="flex items-center justify-between text-zinc-500 border-b border-blue-500/10 pb-4 opacity-50">
-                  <span className="line-through">Configuração de Luz</span>
-                  <span>0 min</span>
+                <div className="flex items-center justify-between text-zinc-300 border-b border-blue-500/10 pb-4">
+                  <span>Renderização (4K)</span>
+                  <span>~30 Segundos</span>
                 </div>
                 <div className="flex items-center justify-between text-blue-400 font-bold pt-2 text-xl">
                   <span>Tempo Total</span>
-                  <span>Mesmo dia</span>
+                  <span>~5 Minutos</span>
                 </div>
               </div>
             </motion.div>
@@ -350,157 +360,91 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Features Section (Refined) */}
-      <section id="features" className="py-32 relative z-10">
+      {/* Features Grid */}
+      <section id="features" className="py-32 relative z-10 border-t border-white/5 bg-black/40">
         <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <FeatureCard 
+              icon={<Zap size={24} />}
+              title="Renderização em Tempo Real"
+              description="Visualize suas ideias instantaneamente. O VECT permite iterar dezenas de opções de materiais e iluminação em segundos, não horas."
+            />
+            <FeatureCard 
+              icon={<Cpu size={24} />}
+              title="Preservação de Geometria"
+              description="Ao contrário de outros modelos generativos, o VECT respeita rigorosamente as linhas do seu modelo 3D. O que você modela é o que você vê."
+            />
+            <FeatureCard 
+              icon={<Image size={24} />}
+              title="Integração BIM/CAD"
+              description="Exporte vistas do Revit, SketchUp ou Rhino e transforme-as em visualizações fotorrealistas sem sair do seu fluxo de trabalho."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-32 relative z-10">
+        <div className="max-w-4xl mx-auto px-6">
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2, margin: "-50px" }}
-            variants={fadeInUp}
-            className="mb-20"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={premiumFadeUp}
+            className="bg-gradient-to-br from-zinc-900 to-black p-12 rounded-[2.5rem] border border-white/5 relative overflow-hidden shadow-2xl"
           >
-            <h2 className="text-4xl md:text-6xl font-bold mb-6">Tecnologia que Entende Arquitetura.</h2>
-            <p className="text-zinc-400 max-w-2xl text-xl">
-              Não é apenas um gerador de imagens. É uma ferramenta de design assistido por IA.
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center font-bold text-white border border-white/10">JD</div>
+              <div>
+                <div className="font-bold text-white">João D.</div>
+                <div className="text-sm text-zinc-500">Arquiteto Sênior</div>
+              </div>
+              <div className="ml-auto flex gap-1 text-blue-500">
+                {[1,2,3,4,5].map(i => <Star key={i} size={16} fill="currentColor" />)}
+              </div>
+            </div>
+            <p className="text-2xl text-zinc-300 italic font-light leading-relaxed">
+              "O VECT mudou completamente como apresento meus projetos. Antes eu levava 2 dias para preparar uma apresentação final. Hoje faço em 30 minutos e o cliente sai muito mais satisfeito."
             </p>
           </motion.div>
-
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2, margin: "0px 0px -100px 0px" }}
-            variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            <FeatureCard 
-              icon={<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>}
-              title="Renderização em Tempo Real"
-              desc="Visualize suas ideias instantaneamente. O VECT permite iterar dezenas de opções de materiais e iluminação em segundos, não horas."
-            />
-            <FeatureCard 
-              icon={<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>}
-              title="Preservação de Geometria"
-              desc="Ao contrário de outros modelos generativos, o VECT respeita rigorosamente as linhas do seu modelo 3D. O que você modela é o que você vê."
-            />
-            <FeatureCard 
-              icon={<svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>}
-              title="Integração BIM/CAD"
-              desc="Exporte vistas do Revit, SketchUp ou Rhino e transforme-as em visualizações fotorrealistas sem sair do seu fluxo de trabalho."
-            />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ROI / Benefits Section */}
-      <section className="py-32 relative z-10 bg-white/5 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div 
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2, margin: "0px 0px -100px 0px" }}
-              variants={staggerContainer}
-            >
-              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mb-8">Venda Projetos com Mais Facilidade.</motion.h2>
-              <div className="space-y-8">
-                <motion.div variants={fadeInUp} className="flex gap-6">
-                  <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 shrink-0">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">Redução de Custos Operacionais</h3>
-                    <p className="text-zinc-400 leading-relaxed">
-                      Elimine a necessidade de render farms caros ou terceirização. O VECT roda na nuvem, acessível de qualquer laptop.
-                    </p>
-                  </div>
-                </motion.div>
-                <motion.div variants={fadeInUp} className="flex gap-6">
-                  <div className="w-12 h-12 rounded-xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">Encante seus Clientes</h3>
-                    <p className="text-zinc-400 leading-relaxed">
-                      Apresente múltiplas opções de acabamento em tempo real durante reuniões. Aumente a confiança e feche contratos mais rápido.
-                    </p>
-                  </div>
-                </motion.div>
-                <motion.div variants={fadeInUp} className="flex gap-6">
-                  <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">Foco no Design, não na Técnica</h3>
-                    <p className="text-zinc-400 leading-relaxed">
-                      Volte a ser arquiteto. Deixe que a IA cuide dos cálculos de fótons e materiais complexos.
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-            <motion.div 
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2, margin: "-50px" }}
-              variants={zoomIn}
-              className="relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-cyan-500/20 blur-[100px] rounded-full"></div>
-              <div className="relative bg-black/40 border border-white/10 rounded-3xl p-8 backdrop-blur-xl">
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center font-bold text-white">JD</div>
-                  <div>
-                    <div className="font-bold text-white">João D.</div>
-                    <div className="text-sm text-zinc-400">Arquiteto Sênior</div>
-                  </div>
-                  <div className="ml-auto text-blue-400">
-                    ★★★★★
-                  </div>
-                </div>
-                <p className="text-zinc-300 italic leading-relaxed">
-                  "O VECT mudou completamente como apresento meus projetos. Antes eu levava 2 dias para preparar uma apresentação final. Hoje faço em 30 minutos e o cliente sai muito mais satisfeito."
-                </p>
-              </div>
-            </motion.div>
-          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 relative overflow-hidden z-10">
-        <div className="absolute inset-0 bg-blue-900/10"></div>
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={zoomIn}
-          className="max-w-5xl mx-auto px-6 text-center relative z-10"
-        >
-          <h2 className="text-5xl md:text-7xl font-bold mb-8">Pronto para criar?</h2>
-          <p className="text-xl text-zinc-400 mb-12 max-w-2xl mx-auto">
-            Estamos construindo o sistema operacional visual para a próxima geração de arquitetos. Garanta seu lugar na revolução.
-          </p>
-          <button 
-            onClick={() => navigate('/register')}
-            className="px-12 py-6 bg-white text-black rounded-full font-bold text-xl hover:scale-105 transition-transform shadow-[0_0_50px_rgba(255,255,255,0.3)]"
+      <section className="py-32 relative z-10 border-t border-white/5">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={premiumFadeUp}
           >
-            Criar Conta Gratuita
-          </button>
-        </motion.div>
+            <h2 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight">Pronto para criar?</h2>
+            <p className="text-xl text-zinc-400 mb-12 max-w-2xl mx-auto">
+              Estamos construindo o sistema operacional visual para a próxima geração de arquitetos. Garanta seu lugar na revolução.
+            </p>
+            <button 
+              onClick={() => navigate('/register')}
+              className="px-10 py-5 bg-white text-black rounded-full font-bold text-xl hover:bg-zinc-200 transition-all shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_60px_rgba(255,255,255,0.2)]"
+            >
+              Criar Conta Gratuita
+            </button>
+          </motion.div>
+        </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-white/5 bg-[#020305] relative z-10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-zinc-800 rounded-lg flex items-center justify-center font-bold text-white">V</div>
-            <span className="font-bold text-zinc-300 text-lg">VECT</span>
+      <footer className="py-12 border-t border-white/5 relative z-10 bg-black">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2 opacity-50 hover:opacity-100 transition-opacity">
+            <div className="w-6 h-6 bg-zinc-800 rounded flex items-center justify-center text-xs font-bold">V</div>
+            <span className="font-bold tracking-widest text-sm">VECT</span>
           </div>
           <div className="text-zinc-600 text-sm">
             © 2025 VECT Inc. Architecture AI.
           </div>
-          <div className="flex gap-8 text-zinc-500 font-medium text-sm">
+          <div className="flex gap-6 text-zinc-600 text-sm font-medium">
             <a href="#" className="hover:text-white transition-colors">Twitter</a>
             <a href="#" className="hover:text-white transition-colors">Instagram</a>
             <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
